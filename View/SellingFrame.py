@@ -142,6 +142,8 @@ class SellingFrame:
                     self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
                     self.clearFrame()
                     return
+                else:
+                    self.mainView.mc.showMessage('Selling Frame Error', msg)
         else:
             msg = 'No Image!'
             self.mainView.mc.showMessage('Selling Frame Error', msg)

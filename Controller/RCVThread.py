@@ -78,9 +78,15 @@ class RCVThread(threading.Thread):
 
                 elif msgProtocol == '/ALRM':
                     if msgDict['RPLY'] == 'ACK':
-                        self.user.money = msgDict['MONEY']
+                        print(msgDict)
+                        self.user.money = self.user.money - msgDict['MONEY']
+                        self.client.eventHandler.changeFrame(self.client.eventHandler.frameList['room'].roomFrame)
                         showinfo('Auction', msgDict['CNT'])
-
+                    elif msgDict['RPLY'] == 'REJ':
+                        showinfo('Auction', msgDict['CNT'])
+                    elif msgDict['RPLY'] == 'NON':
+                        self.user.money = self.user.money + msgDict['MONEY']
+                        self.client.eventHandler.changeFrame(self.client.eventHandler.frameList['room'].roomFrame)
                 elif msgProtocol == '/ACLT':
                     if len(msgDict['ROOMS']) == 0:
                         self.msg = 'REJ'

@@ -70,7 +70,7 @@ class LoginFrame:
         if loginFlag:
             self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
         else:
-            self.mainView.mc.showinfo('Login Error', msg)
+            self.mainView.mc.showMessage('Login Error', msg)
 
     def clearEntry(self, event):
         # will clear out any entry boxes defined below when the user shifts

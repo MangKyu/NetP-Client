@@ -86,15 +86,18 @@ class MainFrame:
         curItem = self.mainFrame.roomFrame.tree.item(self.mainFrame.roomFrame.tree.focus())
 
         # Send the Request to the Controller
-        rFlag, msg = self.mainView.mc.eventHandler.mainHandler.goRoom(curItem['values'][0])
+        try:
+            rFlag, msg = self.mainView.mc.eventHandler.mainHandler.goRoom(curItem['values'][0])
 
-        # Get the Message from Controller whether go Room was succeeded
-        if rFlag:
-            path = self.mainView.mc.adminRoom.roomList[curItem['values'][0]].item.imgPath
-            self.mainView.mc.eventHandler.roomHandler.setImg(path)
-            self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['room'].roomFrame)
-        else:
-            self.mainView.mc.showMessage('msg', 'Failed  to get room info')
+            # Get the Message from Controller whether go Room was succeeded
+            if rFlag:
+                path = self.mainView.mc.adminRoom.roomList[curItem['values'][0]].item.imgPath
+                self.mainView.mc.eventHandler.roomHandler.setImg(path)
+                self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['room'].roomFrame)
+            else:
+                self.mainView.mc.showMessage('msg', 'Failed  to get room info')
+        except:
+            pass
 
     # Refresh User's Data
     def refreshData(self):
