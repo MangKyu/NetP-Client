@@ -28,7 +28,7 @@ class MultiColumnListbox(object):
         self.addRoom(self.roomList)
 
     def _setup_widgets(self):
-        self.container.place(relx=0.05, rely=0.18, relheight=0.6, relwidth=0.9)
+        self.container.place(relx=0.06, rely=0.3, relheight=0.55, relwidth=0.88)
         # create a treeview with dual scrollbars
         self.tree = ttk.Treeview(self.container, columns=self.roomHeader, show="headings")
         self.tree.lift()

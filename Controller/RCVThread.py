@@ -18,7 +18,7 @@ class RCVThread(threading.Thread):
         self.user = user
 
     def run(self):
-        #try:
+        try:
             while self.connFlag:
                 msg = self.sock.recv(4096)
                 msgDict = self.client.aesCipher.decrypt(msg)
@@ -58,7 +58,7 @@ class RCVThread(threading.Thread):
 
                 elif msgProtocol == '/RINF':
                     ext = msgDict['ITPATH'].split('.')[1]
-                    imgPath = self.client.recvImg('test', ext)
+                    imgPath = self.client.recvImg('../View/Pictures/item/test', ext)
                     if msgDict['RPLY'] == 'ACK':
                         self.msg = 'ACK'
                         self.client.adminRoom.setRoom(msgDict, imgPath)
@@ -78,7 +78,6 @@ class RCVThread(threading.Thread):
 
                 elif msgProtocol == '/ALRM':
                     if msgDict['RPLY'] == 'ACK':
-                        print(msgDict)
                         self.user.money = self.user.money - msgDict['MONEY']
                         self.client.eventHandler.changeFrame(self.client.eventHandler.frameList['room'].roomFrame)
                         showinfo('Auction', msgDict['CNT'])
@@ -96,11 +95,25 @@ class RCVThread(threading.Thread):
                     self.client.adminRoom.setRoomLst(msgDict['ROOMS'])
                     self.client.eventHandler.mainHandler.addRoom(msgDict['ROOMS'])
 
-
-        #except:
-#            self.exit()
+                elif msgProtocol == '/WCLT':
+                    if msgDict['RPLY'] == 'ACK':
+                        roomList = msgDict['ROOMS']
+                        self.client.adminRoom.setWatchlist(roomList)
+                        for i in range(len(roomList)):
+                            self.client.recvImg(self.client.adminRoom.watchList[i].imgPath, None)
+                        self.msg = 'ACK'
+                    elif msgDict['RPLY'] == 'REJ':
+                        self.msg = 'REJ'
+                    self.client.sem.release()
+        except:
+            print('RCVThread Exit')
+            self.exit()
 
     # exit the thread
     def exit(self):
-        self.sock.close()
-        self.connFlag = False
+        try:
+            self.sock.close()
+            self.connFlag = False
+            self.client.eventHandler.roomHandler.clock.tFlag = False
+        except:
+            pass

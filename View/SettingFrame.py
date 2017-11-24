@@ -21,106 +21,72 @@ class SettingFrame:
         settingFrame.configure(relief=GROOVE)
         settingFrame.configure(width=265)
 
-        settingFrame.logoImage = Label(settingFrame)
-        settingFrame.logoImage.place(relx=0.02, rely=0.009)
-        settingFrame._img0 = PhotoImage(file="../View/Pictures/Icon.png")
-        settingFrame.logoImage.configure(image=settingFrame._img0)
-        settingFrame.logoImage.bind('<Button-1>', self.clickLogo)
+        settingFrame.bgLabel = Label(settingFrame)
+        settingFrame.bgLabel.place(x=0, y=0, relwidth=1, relheight=1)
+        settingFrame.bgImage = PhotoImage(file="../View/Pictures/SettingFrame/background.png")
+        settingFrame.bgLabel.configure(image=settingFrame.bgImage)
 
-        settingFrame.IDLabel = Label(settingFrame)
-        settingFrame.IDLabel.place(relx=0.288, rely=0.001, height=34, width=55)
-        settingFrame.IDLabel.configure(text='''ID       :''')
-        settingFrame.IDLabel.lift()
-
-        settingFrame.ID = Label(settingFrame)
-        settingFrame.ID.place(relx=0.5, rely=0.001, height=34, width=75)
-        settingFrame.ID.configure(text=self.mainView.mc.user.id)
-        settingFrame.ID.lift()
-
-        settingFrame.nameLabel = Label(settingFrame)
-        settingFrame.nameLabel.place(relx=0.285, rely=0.05, height=34, width=60)
-        settingFrame.nameLabel.configure(text='''Name  :''')
-        settingFrame.nameLabel.lift()
+        settingFrame.imageLabel = Label(settingFrame)
+        settingFrame.imageLabel.place(relx=0.08, rely=0.15)
+        settingFrame._img0 = PhotoImage(file="../View/Pictures/SettingFrame/logo.png")
+        settingFrame.imageLabel.configure(image=settingFrame._img0, bg='#4f779e')
+        settingFrame.imageLabel.bind('<Button-1>', self.clickLogo)
 
         settingFrame.name = Label(settingFrame)
-        settingFrame.name.place(relx=0.5, rely=0.05, height=34, width=75)
-        settingFrame.name.configure(text=self.mainView.mc.user.name)
+        settingFrame.name.place(relx=0.5, rely=0.146, relheight=0.05, relwidth=0.3)
+        settingFrame.name.configure(text=self.mainView.mc.user.name, bg='#4f779e', fg='white', font=('08서울남산체 M', 12))
         settingFrame.name.lift()
 
-        settingFrame.moneyLabel = Label(settingFrame)
-        settingFrame.moneyLabel.place(relx=0.282, rely=0.1, height=34, width=60)
-        settingFrame.moneyLabel.configure(text='''Money :''')
-        settingFrame.moneyLabel.lift()
-
         settingFrame.money = Label(settingFrame)
-        settingFrame.money.place(relx=0.493, rely=0.1, height=34, width=70)
-        settingFrame.money.configure(text=self.mainView.mc.user.money)
+        settingFrame.money.place(relx=0.5, rely=0.212,relheight=0.05, relwidth=0.3)
+        settingFrame.money.configure(text=self.mainView.mc.user.money, bg='#4f779e', fg='white', font=('08서울남산체 M', 12))
         settingFrame.money.lift()
 
-        settingFrame.itemFrame = Frame(settingFrame, highlightbackground="green", highlightcolor="green",
-                                       highlightthickness=1)
-        settingFrame.itemFrame.place(relx=0.05, rely=0.18, relheight=0.7, relwidth=0.9)
-
-        def on_configure(event):
-            # update scroll region after starting 'mainloop'
-            # when all widgets are in canvas
-            settingFrame.canvas.configure(scrollregion=settingFrame.canvas.bbox('all'))
-
-        # --- create canvas with scrollbar ---
-
-        settingFrame.canvas = Canvas(settingFrame.itemFrame)
-        settingFrame.canvas.pack(side=LEFT)
-
-        settingFrame.scrollbar = Scrollbar(settingFrame.itemFrame, command=settingFrame.canvas.yview)
-        settingFrame.scrollbar.pack(side=RIGHT, fill='y')
-        settingFrame.canvas.configure(yscrollcommand=settingFrame.scrollbar.set)
-
-        # update scrollregion after starting 'mainloop'
-        # when all widgets are in canvas
-        settingFrame.canvas.bind('<Configure>', on_configure)
-
-        # --- put frame in canvas ---
-
-        settingFrame.listframe = Frame(settingFrame.itemFrame)
-        settingFrame.canvas.create_window((0, 0), window=settingFrame.listframe, anchor='nw')
-        settingFrame.canvas.place(relx=0, rely=0, relheight=1, relwidth=1)
-
         # --- add widgets in frame ---\
-        img = self.mainView.mc.openPhotoImage(self.path + "Change.png")
-        panel = Label(settingFrame.itemFrame, image=img)
+        img = self.mainView.mc.openPhotoImage(self.path + "purple.png")
+        panel = Label(settingFrame, image=img, bg='#6d2e9e')
         panel.image = img
-        label = Label(settingFrame.itemFrame, font=('08서울남산체 M', 15))
-        label.configure(text='''Change Password''')
-        panel.place(relx=0.01, rely=0.01)
-        label.place(relx=0.27, rely=0.065)
+        label = Label(settingFrame, font=('08서울남산체 M', 15))
+        label.configure(text='''Change Password''', bg = "#1c4478", fg='white', font=('08서울남산체 M', 16))
+        panel.place(relx=0.12, rely=0.33)
+        label.place(relx=0.32, rely=0.33, relheight=0.07, relwidth=0.572)
         panel.bind('<Button-1>', self.changePW)
 
-        img = self.mainView.mc.openPhotoImage(self.path + "Money.png")
-        panel = Label(settingFrame.itemFrame, image=img)
+        img = self.mainView.mc.openPhotoImage(self.path + "yellow.png")
+        panel = Label(settingFrame, image=img, bg='#fcbd00')
         panel.image = img
-        label = Label(settingFrame.itemFrame, font=('08서울남산체 M', 15))
-        label.configure(text='''Charge Money''')
-        panel.place(relx=0.01, rely=0.22)
-        label.place(relx=0.32, rely=0.28)
+        label = Label(settingFrame, font=('08서울남산체 M', 15))
+        label.configure(text='''Charge Money''', bg = "#1c4478", fg='white', font=('08서울남산체 M', 16))
+        panel.place(relx=0.12, rely=0.43)
+        label.place(relx=0.32, rely=0.43, relheigh=0.07, relwidth=0.572)
         panel.bind('<Button-1>', self.chargeMoney)
 
-        img = self.mainView.mc.openPhotoImage(self.path + "Barcode.png")
-        panel = Label(settingFrame.itemFrame, image=img)
+        img = self.mainView.mc.openPhotoImage(self.path + "purple.png")
+        panel = Label(settingFrame, image=img, bg='#6d2e9e')
         panel.image = img
-        label = Label(settingFrame.itemFrame, font=('08서울남산체 M', 15))
-        label.configure(text='''Transaction List''')
-        panel.place(relx=0.01, rely=0.43)
-        label.place(relx=0.3, rely=0.495)
+        label = Label(settingFrame, font=('08서울남산체 M', 15))
+        label.configure(text='''Transaction List''', bg = "#1c4478", fg='white', font=('08서울남산체 M', 16))
+        panel.place(relx=0.12, rely=0.53)
+        label.place(relx=0.32, rely=0.53, relheigh=0.07, relwidth=0.572)
         panel.bind('<Button-1>', self.purchaseList)
 
-        img = self.mainView.mc.openPhotoImage(self.path + "Cart.png")
-        panel = Label(settingFrame.itemFrame, image=img)
+        img = self.mainView.mc.openPhotoImage(self.path + "yellow.png")
+        panel = Label(settingFrame, image=img, bg='#fcbd00')
         panel.image = img
-        label = Label(settingFrame.itemFrame, font=('08서울남산체 M', 15))
-        label.configure(text='''Auction List''')
-        panel.place(relx=0.01, rely=0.64)
-        label.place(relx=0.38, rely=0.71)
+        label = Label(settingFrame, font=('08서울남산체 M', 15))
+        label.configure(text='''Auction List''', bg = "#1c4478", fg='white', font=('08서울남산체 M', 16))
+        panel.place(relx=0.12, rely=0.63)
+        label.place(relx=0.32, rely=0.63, relheigh=0.07, relwidth=0.572)
         panel.bind('<Button-1>', self.aucList)
+
+        img = self.mainView.mc.openPhotoImage(self.path + "purple.png")
+        panel = Label(settingFrame, image=img, bg='#fcbd00')
+        panel.image = img
+        label = Label(settingFrame, font=('08서울남산체 M', 15))
+        label.configure(text='''Watch List''', bg = "#1c4478", fg='white', font=('08서울남산체 M', 16))
+        panel.place(relx=0.12, rely=0.73)
+        label.place(relx=0.32, rely=0.73, relheigh=0.07, relwidth=0.572)
+        panel.bind('<Button-1>', self.watchList)
 
         self.mainView.settingFrame = settingFrame
         self.settingFrame = settingFrame
@@ -128,7 +94,6 @@ class SettingFrame:
     # Refresh User's Data
     def refreshData(self):
         name, id, money = self.mainView.mc.user.getUser()
-        self.settingFrame.ID.configure(text=id)
         self.settingFrame.name.configure(text=name)
         self.settingFrame.money.configure(text=money)
 
@@ -159,5 +124,13 @@ class SettingFrame:
         pFlag, msg = self.mainView.mc.eventHandler.settingHandler.purchaseList(self.mainView.mc.user.id)
         if pFlag:
             self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
+        else:
+            self.mainView.mc.showMessage('No purchase list', msg)
+
+    def watchList(self, event):
+        wFlag, msg = self.mainView.mc.eventHandler.settingHandler.watchList(self.mainView.mc.user.id)
+        if wFlag:
+            self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['watch'].watchlistFrame)
+            self.mainView.mc.eventHandler.watchHandler.setWatchlist()
         else:
             self.mainView.mc.showMessage('No purchase list', msg)

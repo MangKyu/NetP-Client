@@ -1,5 +1,5 @@
 from Controller import MainController
-from View import MainFrame, LoginFrame, SignUpFrame, SettingFrame, SellingFrame, RoomFrame
+from View import MainFrame, LoginFrame, SignUpFrame, SettingFrame, SellingFrame, RoomFrame, WatchlistFrame
 
 try:
     from Tkinter import *
@@ -20,16 +20,18 @@ class MainUI:
         self.root.title("What is Title")
         self.root.configure(background="black")
         self.mc = MainController.MainController()
-        frameList = {'login': LoginFrame.LoginFrame(self, self.root),
-                     'sign': SignUpFrame.SignUpFrame(self, self.root),
-                     'main': MainFrame.MainFrame(self, self.root),
-                     'room': RoomFrame.RoomFrame(self, self.root),
-                     'selling': SellingFrame.SellingFrame(self, self.root),
-                     'setting': SettingFrame.SettingFrame(self, self.root)
+        frameList = {
+                    'sign': SignUpFrame.SignUpFrame(self, self.root),
+                    'main': MainFrame.MainFrame(self, self.root),
+                    'selling': SellingFrame.SellingFrame(self, self.root),
+                    'setting': SettingFrame.SettingFrame(self, self.root),
+                    'login': LoginFrame.LoginFrame(self, self.root),
+                    'room': RoomFrame.RoomFrame(self, self.root),
+                    'watch': WatchlistFrame.WatchlistFrame(self, self.root)
                      }
 
         self.mc.createHandler(frameList)
-
+#        self.mc.eventHandler['room'].clock.sem.acquire()
         # Set the Frame for LoginFrame
         self.mc.eventHandler.changeFrame(self.mc.frameList['login'].loginFrame)
         self.frameList = frameList

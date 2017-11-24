@@ -3,7 +3,7 @@ try:
 except ImportError:
     from tkinter import *
 from PIL import ImageTk, Image
-
+from View import ImageFrame
 class RoomFrame:
     root = None
     roomFrame = None
@@ -19,104 +19,71 @@ class RoomFrame:
         roomFrame.configure(relief=GROOVE)
         roomFrame.configure(width=265)
 
-        roomFrame.logoImage = Label(roomFrame)
-        roomFrame.logoImage.place(relx=0.02, rely=0.009)
-        roomFrame._img0 = PhotoImage(file="../View/Pictures/Icon.png")
-        roomFrame.logoImage.configure(image=roomFrame._img0)
-        roomFrame.logoImage.bind('<Button-1>', self.clickLogo)
+        roomFrame.bgLabel = Label(roomFrame)
+        roomFrame.bgLabel.place(x=0, y=0, relwidth=1, relheight=1)
+        roomFrame.bgImage = PhotoImage(file="../View/Pictures/RoomFrame/background.png")
+        roomFrame.bgLabel.configure(image=roomFrame.bgImage)
 
-        roomFrame.IDLabel = Label(roomFrame)
-        roomFrame.IDLabel.place(relx=0.288, rely=0.001, height=34, width=55)
-        roomFrame.IDLabel.configure(text='''ID       :''')
-        roomFrame.IDLabel.lift()
-
-        roomFrame.nameLabel = Label(roomFrame)
-        roomFrame.nameLabel.place(relx=0.285, rely=0.05, height=34, width=60)
-        roomFrame.nameLabel.configure(text='''Name  :''')
-        roomFrame.nameLabel.lift()
-
-        roomFrame.moneyLabel = Label(roomFrame)
-        roomFrame.moneyLabel.place(relx=0.282, rely=0.1, height=34, width=60)
-        roomFrame.moneyLabel.configure(text='''Money :''')
-        roomFrame.moneyLabel.lift()
-
-        roomFrame.ID = Label(roomFrame)
-        roomFrame.ID.place(relx=0.5, rely=0.001, height=34, width=75)
-        roomFrame.ID.configure(text=self.mainView.mc.user.id)
-        roomFrame.ID.lift()
+        roomFrame.imageLabel = Label(roomFrame)
+        roomFrame.imageLabel.place(relx=0.08, rely=0.15)
+        roomFrame._img0 = PhotoImage(file="../View/Pictures/RoomFrame/logo.png")
+        roomFrame.imageLabel.configure(image=roomFrame._img0, bg='#4f779e')
+        roomFrame.imageLabel.bind('<Button-1>', self.clickLogo)
 
         roomFrame.name = Label(roomFrame)
-        roomFrame.name.place(relx=0.5, rely=0.05, height=34, width=75)
-        roomFrame.name.configure(text=self.mainView.mc.user.name)
+        roomFrame.name.place(relx=0.5, rely=0.146, relheight=0.04, relwidth=0.3)
+        roomFrame.name.configure(text=self.mainView.mc.user.name, bg='#4f779e', fg='white', font=('08서울남산체 M', 12))
         roomFrame.name.lift()
 
         roomFrame.money = Label(roomFrame)
-        roomFrame.money.place(relx=0.493, rely=0.1, height=34, width=70)
-        roomFrame.money.configure(text=self.mainView.mc.user.money)
+        roomFrame.money.place(relx=0.5, rely=0.212, relheight=0.04, relwidth=0.3)
+        roomFrame.money.configure(text=self.mainView.mc.user.money, bg='#4f779e', fg='white', font=('08서울남산체 B', 12))
         roomFrame.money.lift()
 
-        roomFrame.itemFrame = Frame(roomFrame, highlightbackground="green",
-                                       highlightcolor="green", highlightthickness=1)
-        roomFrame.itemFrame.place(relx=0.05, rely=0.18, relheight=0.65, relwidth=0.9)
+        roomFrame.item = Label(roomFrame)
+        roomFrame.item.place(relx=0.32, rely=0.605, relheight=0.04, relwidth=0.58)
+        roomFrame.item.configure(text='itemName', bg="#56769e", fg='white', font=('08서울남산체 B', 12))
 
-        roomFrame.itemFrame.itemLabel = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.itemLabel.place(relx=0.013, rely=0.016, relheight=0.1, relwidth=0.2)
-        roomFrame.itemFrame.itemLabel.configure(text=" Item   :")
+        roomFrame.seller = Label(roomFrame)
+        roomFrame.seller.place(relx=0.32, rely=0.554, relheight=0.04, relwidth=0.58)
+        roomFrame.seller.configure(text='Seller ID', bg="#56769e",fg='white', font=('08서울남산체 B', 12))
 
-        roomFrame.itemFrame.item = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.item.place(relx=0.26, rely=0.03, relheight=0.07, relwidth=0.65)
-        roomFrame.itemFrame.item.configure(text='itemName')
+        roomFrame.price = Label(roomFrame)
+        roomFrame.price.place(relx=0.32, rely=0.655, relheight=0.04, relwidth=0.58)
+        roomFrame.price.configure(text="Price  ", bg="#56769e", fg='white', font=('08서울남산체 B', 12))
 
-        roomFrame.itemFrame.sellerLabel = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.sellerLabel.place(relx=0.013, rely=0.1, relheight=0.1, relwidth=0.2)
-        roomFrame.itemFrame.sellerLabel.configure(text=" Seller  :")
+        roomFrame.curT = Label(roomFrame)
+        roomFrame.curT.place(relx=0.32, rely=0.702, relheight=0.04, relwidth=0.58)
+        roomFrame.curT.configure(text="curT ", bg="#56769e", fg='white', font=('08서울남산체 B', 12))
 
-        roomFrame.itemFrame.seller = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.seller.place(relx=0.26, rely=0.114, relheight=0.07, relwidth=0.65)
-        roomFrame.itemFrame.seller.configure(text='Seller ID')
+        roomFrame.endT = Label(roomFrame)
+        roomFrame.endT.place(relx=0.32, rely=0.752, relheight=0.04, relwidth=0.58)
+        roomFrame.endT.configure(text="endT ", bg = "#56769e", fg='white', font=('08서울남산체 B', 12))
 
-        roomFrame.itemFrame.priceLabel = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.priceLabel.place(relx=0.013, rely=0.184, relheight=0.1, relwidth=0.2)
-        roomFrame.itemFrame.priceLabel.configure(text="Price   :")
+        roomFrame.descText = Text(roomFrame, bg='#56769e')
+        roomFrame.descText.place(relx=0.32, rely=0.802, relheight=0.07, relwidth=0.58)
+        roomFrame.descText.configure(state=DISABLED, fg='white', font=('08서울남산체 B', 12))
+        roomFrame.imgPath = None
 
-        roomFrame.itemFrame.price = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.price.place(relx=0.26, rely=0.206, relheight=0.07, relwidth=0.65)
-        roomFrame.itemFrame.price.configure(text="Price  ")
-
-        roomFrame.itemFrame.timeLabel = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.timeLabel.place(relx=0.01, rely=0.268, relheight=0.1, relwidth=0.2)
-        roomFrame.itemFrame.timeLabel.configure(text="End-T  :")
-
-        roomFrame.itemFrame.time = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.time.place(relx=0.26, rely=0.284, relheight=0.07, relwidth=0.65)
-        roomFrame.itemFrame.time.configure(text="time ")
-
-        roomFrame.itemFrame.descLabel = Label(roomFrame.itemFrame)
-        roomFrame.itemFrame.descLabel.place(relx=0.013, rely=0.352, relheight=0.1, relwidth=0.2)
-        roomFrame.itemFrame.descLabel.configure(text="Desc   :")
-
-        roomFrame.itemFrame.descText = Text(roomFrame.itemFrame)
-        roomFrame.itemFrame.descText.place(relx=0.26, rely=0.38, relheight=0.15, relwidth=0.68)
-        roomFrame.itemFrame.descText.configure(state=DISABLED)
-        roomFrame.itemFrame.imgPath = None
-
-        roomFrame.itemFrame.imgLabel = Label(roomFrame.itemFrame)
+        roomFrame.imgLabel = Label(roomFrame)
         roomFrame._img1 = PhotoImage(file="../Controller/test.png")
-        roomFrame.itemFrame.imgLabel.place(relx=0.2, rely=0.56, height=120, width=150)
-        roomFrame.itemFrame.imgLabel.configure(image=roomFrame._img1)
+        roomFrame.imgLabel.place(relx=0.26, rely=0.3, height=120, width=150)
+        roomFrame.imgLabel.configure(image=roomFrame._img1)
+        roomFrame.imgLabel.bind('<Button-1>', self.newImage)
+
+        roomFrame.watchLabel = Label(roomFrame)
+        roomFrame.watch_img1 = PhotoImage(file="../View/Pictures/RoomFrame/YesWatch.png")
+        roomFrame.watchLabel.place(relx=0.85, rely=0.3, height=25, width=25)
+        roomFrame.watchLabel.configure(image=roomFrame.watch_img1, bg='#4f779e')
+        roomFrame.watchLabel.bind('<Button-1>', self.sendWatch)
 
         roomFrame.priceEntry = Entry(roomFrame)
-        roomFrame.priceEntry.place(relx=0.15, rely=0.85, relheight=0.06, relwidth=0.4)
+        roomFrame.priceEntry.place(relx=0.059, rely=0.9, height=30, relwidth=0.58)
 
         roomFrame.roomButton = Button(roomFrame)
-        roomFrame.roomButton.place(relx=0.63, rely=0.845, height=30, width=70)
-        roomFrame.roomButton.configure(text=" Buy ")
+        roomFrame.roomButton.place(relx=0.66, rely=0.9, height=30, relwidth=0.28)
+        roomFrame.roomButton.configure(bg='#4f536e', fg='white', text='''BUY''', font=('08서울남산체 M', 16))
         roomFrame.roomButton.bind('<Button-1>', self.buy)
-
-        roomFrame.copyrightLabel = Label(roomFrame)
-        roomFrame.copyrightLabel.place(relx=0.07, rely=0.92, height=24, width=242)
-        roomFrame.copyrightLabel.configure(text='''Made by 201411317 Cho MinKyu''')
-
         self.mainView.roomFrame = roomFrame
         self.roomFrame = roomFrame
 
@@ -126,31 +93,36 @@ class RoomFrame:
         self.roomFrame.priceEntry.delete(0, END)
 
     # Set the Image in the RoomFrame
-    def setImage(self):
-        img = Image.open(self.roomFrame.itemFrame.imgPath)
+    def setImage(self, watch):
+        img = Image.open(self.roomFrame.imgPath)
         img = img.resize((150, 120), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(img)
         self.roomFrame._img1 = img
-        self.roomFrame.itemFrame.imgLabel.configure(image=self.roomFrame._img1)
+        self.roomFrame.imgLabel.configure(image=self.roomFrame._img1)
+        if watch:
+            self.roomFrame.watch_img1 = PhotoImage(file="../View/Pictures/RoomFrame/YesWatch.png")
+        else:
+            self.roomFrame.watch_img1 = PhotoImage(file="../View/Pictures/RoomFrame/NoWatch.png")
+        self.roomFrame.watchLabel.configure(image=self.roomFrame.watch_img1, bg='#4f779e')
         self.setData()
 
     # Set data for the item in the RoomFrame
     def setData(self):
-        self.roomFrame.itemFrame.item.configure(text=self.mainView.mc.adminRoom.room.item.itemName)
-        self.roomFrame.itemFrame.seller.configure(text=self.mainView.mc.adminRoom.room.seller)
-        self.roomFrame.itemFrame.price.configure(text=self.mainView.mc.adminRoom.room.item.price)
-        self.roomFrame.itemFrame.time.configure(text=self.mainView.mc.adminRoom.room.endTime)
-        self.roomFrame.itemFrame.descText.configure(state=NORMAL)
-        self.roomFrame.itemFrame.descText.delete('1.0', END)
-        self.roomFrame.itemFrame.descText.insert(END, self.mainView.mc.adminRoom.room.item.itemDesc)
-        self.roomFrame.itemFrame.descText.configure(state=DISABLED)
+        self.roomFrame.item.configure(text=self.mainView.mc.adminRoom.room.item.itemName)
+        self.roomFrame.seller.configure(text=self.mainView.mc.adminRoom.room.seller)
+        self.roomFrame.price.configure(text=self.mainView.mc.adminRoom.room.item.price)
+        self.roomFrame.endT.configure(text=self.mainView.mc.adminRoom.room.endTime)
+        self.roomFrame.descText.configure(state=NORMAL)
+        self.roomFrame.descText.delete('1.0', END)
+        self.roomFrame.descText.insert(END, self.mainView.mc.adminRoom.room.item.itemDesc)
+        self.roomFrame.descText.configure(state=DISABLED)
 
     # Buy Action for Button
     def buy(self, event):
         # Get item price, my price, end time of Auction from Entry
-        price = self.roomFrame.itemFrame.price['text']
+        price = self.roomFrame.price['text']
         myPrice = self.roomFrame.priceEntry.get()
-        endTime = self.roomFrame.itemFrame.time['text']
+        endTime = self.roomFrame.endT['text']
 
         # Check my price whether it is integer value
         try:
@@ -163,7 +135,6 @@ class RoomFrame:
         # Send the Request to the Controller
         bFlag, msg = self.mainView.mc.eventHandler.roomHandler.buy(int_price, price, endTime,
                                                               self.mainView.mc.adminRoom.room.roomIdx)
-
         # Get the Message from Controller whether buy request was succeeded
         if bFlag:
             self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
@@ -174,6 +145,23 @@ class RoomFrame:
     # Refresh User's Data
     def refreshData(self):
         name, id, money = self.mainView.mc.user.getUser()
-        self.roomFrame.ID.configure(text=id)
         self.roomFrame.name.configure(text=name)
         self.roomFrame.money.configure(text=money)
+
+    def newImage(self, *event):
+        ImageFrame.ImageFrame(self.mainView, self.roomFrame.imgPath)
+
+    def sendWatch(self, *event):
+        # Send the Request to the Controller
+        wFlag, msg = self.mainView.mc.eventHandler.roomHandler.sendWatch(self.mainView.mc.adminRoom.room.roomIdx,
+                                                                         self.mainView.mc.adminRoom.room.watch)
+        # Get the Message from Controller whether buy request was succeeded
+        if wFlag:
+            self.roomFrame.priceEntry.delete(0, END)
+            path = self.mainView.mc.adminRoom.room.item.imgPath
+            watch = self.mainView.mc.adminRoom.room.watch
+            self.mainView.mc.eventHandler.roomHandler.setImg(path, watch)
+            self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['room'].roomFrame)
+
+        else:
+            self.mainView.mc.showMessage('Selling Frame Error', msg)

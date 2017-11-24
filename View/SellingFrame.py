@@ -21,111 +21,82 @@ class SellingFrame:
         sellingFrame.configure(relief=GROOVE)
         sellingFrame.configure(width=265)
 
-        sellingFrame.logoImage = Label(sellingFrame)
-        sellingFrame.logoImage.place(relx=0.02, rely=0.009)
-        sellingFrame._img0 = PhotoImage(file="../View/Pictures/Icon.png")
-        sellingFrame.logoImage.configure(image=sellingFrame._img0)
-        sellingFrame.logoImage.bind('<Button-1>', self.clickLogo)
+        sellingFrame.bgLabel = Label(sellingFrame)
+        sellingFrame.bgLabel.place(x=0, y=0, relwidth=1, relheight=1)
+        sellingFrame.bgImage = PhotoImage(file="../View/Pictures/SellingFrame/background.png")
+        sellingFrame.bgLabel.configure(image=sellingFrame.bgImage)
 
-        sellingFrame.IDLabel = Label(sellingFrame)
-        sellingFrame.IDLabel.place(relx=0.288, rely=0.001, height=34, width=55)
-        sellingFrame.IDLabel.configure(text='''ID       :''')
-        sellingFrame.IDLabel.lift()
-
-        sellingFrame.nameLabel = Label(sellingFrame)
-        sellingFrame.nameLabel.place(relx=0.285, rely=0.05, height=34, width=60)
-        sellingFrame.nameLabel.configure(text='''Name  :''')
-        sellingFrame.nameLabel.lift()
-
-        sellingFrame.moneyLabel = Label(sellingFrame)
-        sellingFrame.moneyLabel.place(relx=0.282, rely=0.1, height=34, width=60)
-        sellingFrame.moneyLabel.configure(text='''Money :''')
-        sellingFrame.moneyLabel.lift()
-
-        sellingFrame.ID = Label(sellingFrame)
-        sellingFrame.ID.place(relx=0.5, rely=0.001, height=34, width=75)
-        sellingFrame.ID.configure(text=self.mainView.mc.user.id)
-        sellingFrame.ID.lift()
+        sellingFrame.imageLabel = Label(sellingFrame)
+        sellingFrame.imageLabel.place(relx=0.08, rely=0.15)
+        sellingFrame._img0 = PhotoImage(file="../View/Pictures/SellingFrame/logo.png")
+        sellingFrame.imageLabel.configure(image=sellingFrame._img0, bg='#4f779e')
+        sellingFrame.imageLabel.bind('<Button-1>', self.clickLogo)
 
         sellingFrame.name = Label(sellingFrame)
-        sellingFrame.name.place(relx=0.5, rely=0.05, height=34, width=75)
-        sellingFrame.name.configure(text=self.mainView.mc.user.name)
+        sellingFrame.name.place(relx=0.5, rely=0.146, relheight=0.05, relwidth=0.3)
+        sellingFrame.name.configure(text=self.mainView.mc.user.name, bg='#4f779e', fg='white', font=('08서울남산체 M', 12))
         sellingFrame.name.lift()
 
         sellingFrame.money = Label(sellingFrame)
-        sellingFrame.money.place(relx=0.493, rely=0.1, height=34, width=70)
-        sellingFrame.money.configure(text=self.mainView.mc.user.money)
+        sellingFrame.money.place(relx=0.5, rely=0.212,relheight=0.05, relwidth=0.3)
+        sellingFrame.money.configure(text=self.mainView.mc.user.money, bg='#4f779e', fg='white', font=('08서울남산체 M', 12))
         sellingFrame.money.lift()
 
-        sellingFrame.sellFrame = Frame(sellingFrame, highlightbackground="green",
-                                       highlightcolor="green", highlightthickness=1)
-        sellingFrame.sellFrame.place(relx=0.05, rely=0.18, relheight=0.65, relwidth=0.9)
+        sellingFrame.itemEntry = Entry(sellingFrame, bg = "#1c4478")
+        sellingFrame.itemEntry.place(relx=0.3, rely=0.595, relheight=0.05, relwidth=0.58)
+        sellingFrame.itemEntry.configure(fg='white', font=('08서울남산체 M', 12))
 
-        sellingFrame.sellFrame.itemLabel = Label(sellingFrame.sellFrame)
-        sellingFrame.sellFrame.itemLabel.place(relx=0.015, rely=0.04, relheight=0.1, relwidth=0.2)
-        sellingFrame.sellFrame.itemLabel.configure(text=" Item  :")
+        sellingFrame.priceEntry = Entry(sellingFrame, bg = "#1c4478")
+        sellingFrame.priceEntry.place(relx=0.3, rely=0.665, relheight=0.05, relwidth=0.58)
+        sellingFrame.priceEntry.configure(fg='white', font=('08서울남산체 M', 12))
 
-        sellingFrame.sellFrame.itemEntry = Entry(sellingFrame.sellFrame)
-        sellingFrame.sellFrame.itemEntry.place(relx=0.26, rely=0.04, relheight=0.1, relwidth=0.68)
+        sellingFrame.descText = Text(sellingFrame, bg = "#1c4478")
+        sellingFrame.descText.place(relx=0.3, rely=0.735, relheight=0.08, relwidth=0.58)
+        sellingFrame.descText.configure(fg='white', font=('08서울남산체 M', 12))
 
-        sellingFrame.sellFrame.priceLabel = Label(sellingFrame.sellFrame)
-        sellingFrame.sellFrame.priceLabel.place(relx=0.015, rely=0.19, relheight=0.1, relwidth=0.2)
-        sellingFrame.sellFrame.priceLabel.configure(text="Price  :")
+        sellingFrame.imagePath = ''
 
-        sellingFrame.sellFrame.priceEntry = Entry(sellingFrame.sellFrame)
-        sellingFrame.sellFrame.priceEntry.place(relx=0.26, rely=0.19, relheight=0.1, relwidth=0.68)
-
-        sellingFrame.sellFrame.descLabel = Label(sellingFrame.sellFrame)
-        sellingFrame.sellFrame.descLabel.place(relx=0.015, rely=0.34, relheight=0.1, relwidth=0.2)
-        sellingFrame.sellFrame.descLabel.configure(text="Desc  :")
-
-        sellingFrame.sellFrame.descText = Text(sellingFrame.sellFrame)
-        sellingFrame.sellFrame.descText.place(relx=0.26, rely=0.34, relheight=0.15, relwidth=0.68)
-
-        sellingFrame.sellFrame.imagePath = None
-
-        sellingFrame.sellFrame.imgLabel = Label(sellingFrame.sellFrame)
+        sellingFrame.imgLabel = Label(sellingFrame)
         sellingFrame._img1 = PhotoImage(file="../View/Pictures/SellingFrame/ImgIcon.png")
-        sellingFrame.sellFrame.imgLabel.place(relx=0.2, rely=0.55, height=120, width=150)
-        sellingFrame.sellFrame.imgLabel.configure(image=sellingFrame._img1)
-        sellingFrame.sellFrame.imgLabel.bind('<Button-1>', self.openItemImg)
+        sellingFrame.imgLabel.place(relx=0.26, rely=0.33, height=120, width=150)
+        sellingFrame.imgLabel.configure(image=sellingFrame._img1, bg="#5f7899")
+        sellingFrame.imgLabel.bind('<Button-1>', self.openItemImg)
 
         sellingFrame.sellingButton = Button(sellingFrame)
-        sellingFrame.sellingButton.place(relx=0.23, rely=0.83, height=40, width=150)
-        sellingFrame.sellingButton.configure(text=" Sell")
+        sellingFrame.sellingButton.place(relx=0.06, rely=0.88, height=30, relwidth=0.88)
+        sellingFrame.sellingButton.configure(bg='#4f536e', fg='white', text='''SELL''', font=('08서울남산체 M', 16))
         sellingFrame.sellingButton.bind('<Button-1>', self.sell)
-
-        sellingFrame.copyrightLabel = Label(sellingFrame)
-        sellingFrame.copyrightLabel.place(relx=0.07, rely=0.92, height=24, width=242)
-        sellingFrame.copyrightLabel.configure(text='''Made by 201411317 Cho MinKyu''')
 
         self.mainView.sellingFrame = sellingFrame
         self.sellingFrame = sellingFrame
 
     # Get the Image for item
     def openItemImg(self, event):
-        self.sellingFrame.sellFrame.imagePath = filedialog.askopenfilename(
+        self.sellingFrame.imagePath = filedialog.askopenfilename(
             title="choose your file", filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
-        if self.sellingFrame.sellFrame.imagePath != '':
-            img = Image.open(self.sellingFrame.sellFrame.imagePath)
+        if self.sellingFrame.imagePath != '':
+            img = Image.open(self.sellingFrame.imagePath)
             img = img.resize((150, 120), Image.ANTIALIAS)
             img = ImageTk.PhotoImage(img)
             self.sellingFrame._img1 = img
-            self.sellingFrame.sellFrame.imgLabel.configure(image=self.sellingFrame._img1)
+            self.sellingFrame.imgLabel.configure(image=self.sellingFrame._img1)
 
     # Go to the MainFrame
     def clickLogo(self, event):
         self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
+        self.clearFrame()
+
+
 
     # Sell Action for Button
     def sell(self, event):
         # Get item name, price, item Description from Entry
-        itemName = self.sellingFrame.sellFrame.itemEntry.get()
-        price = self.sellingFrame.sellFrame.priceEntry.get()
-        itemDesc = self.sellingFrame.sellFrame.descText.get("1.0", END)
+        itemName = self.sellingFrame.itemEntry.get()
+        price = self.sellingFrame.priceEntry.get()
+        itemDesc = self.sellingFrame.descText.get("1.0", END)
 
         # Check price whether it is integer value
-        if self.sellingFrame.sellFrame.imagePath != '':
+        if self.sellingFrame.imagePath != '' or self.sellingFrame.imagePath != None :
             try:
                 integer_price = int(price)
             except ValueError:
@@ -134,7 +105,7 @@ class SellingFrame:
                 return
             else:
                 # Create item instance
-                item = Item.Item(self.mainView.mc.user.id, itemName, integer_price, itemDesc, self.sellingFrame.sellFrame.imagePath)
+                item = Item.Item(self.mainView.mc.user.id, itemName, integer_price, itemDesc, self.sellingFrame.imagePath)
 
                 # Get the Message from Controller whether sell request was succeeded
                 sellFlag, msg = self.mainView.mc.eventHandler.sellingHandler.sell(item)
@@ -150,15 +121,14 @@ class SellingFrame:
 
     # Clear the Entry
     def clearFrame(self):
-        self.sellingFrame.sellFrame.descText.delete('1.0', END)
-        self.sellingFrame.sellFrame.priceEntry.delete(0, END)
-        self.sellingFrame.sellFrame.itemEntry.delete(0, END)
+        self.sellingFrame.descText.delete('1.0', END)
+        self.sellingFrame.priceEntry.delete(0, END)
+        self.sellingFrame.itemEntry.delete(0, END)
         self.sellingFrame._img1 = PhotoImage(file="../View/Pictures/SellingFrame/ImgIcon.png")
-        self.sellingFrame.sellFrame.imgLabel.configure(image=self.sellingFrame._img1)
+        self.sellingFrame.imgLabel.configure(image=self.sellingFrame._img1)
 
     # Refresh User's Data
     def refreshData(self):
         name, id, money = self.mainView.mc.user.getUser()
-        self.sellingFrame.ID.configure(text=id)
         self.sellingFrame.name.configure(text=name)
         self.sellingFrame.money.configure(text=money)

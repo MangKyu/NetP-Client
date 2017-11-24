@@ -5,9 +5,11 @@ class Room:
     seller = None
     endTime = None
     item = None
+    watch = False
 
     # Constructor for Room instance
     def __init__(self, roomIdx, seller, itemName):
         self.item = Item.Item(seller, itemName)
         self.roomIdx = roomIdx
         self.seller = seller
+        self.watch = True

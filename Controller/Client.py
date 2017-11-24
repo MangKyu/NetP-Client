@@ -107,7 +107,8 @@ class Client:
 
     # Receive Image from server
     def recvImg(self, imgPath, ext):
-        imgPath = imgPath + '.'+ext
+        if ext != None:
+            imgPath = imgPath + '.'+ext
         with open(imgPath, 'wb') as f:
             while True:
                 buf = self.sock.recv(4096)

@@ -57,3 +57,14 @@ class SettingFrameHandler:
         else:
             msg = '''No Purchased List'''
         return False, msg
+
+    def watchList(self, id):
+        watchDict = {'MSG': '/WCLT', 'ID': id}
+        self.client.sendMsg(watchDict)
+        self.client.sem.acquire()
+        if self.client.rcvThread.msg == 'ACK':
+            msg = '''Get List Complete'''
+            return True, msg
+        else:
+            msg = '''No Purchased List'''
+        return False, msg
