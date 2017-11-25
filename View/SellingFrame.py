@@ -86,8 +86,6 @@ class SellingFrame:
         self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
         self.clearFrame()
 
-
-
     # Sell Action for Button
     def sell(self, event):
         # Get item name, price, item Description from Entry
@@ -96,7 +94,7 @@ class SellingFrame:
         itemDesc = self.sellingFrame.descText.get("1.0", END)
 
         # Check price whether it is integer value
-        if self.sellingFrame.imagePath != '' or self.sellingFrame.imagePath != None :
+        if self.sellingFrame.imagePath is not '' or self.sellingFrame.imagePath is not None:
             try:
                 integer_price = int(price)
             except ValueError:

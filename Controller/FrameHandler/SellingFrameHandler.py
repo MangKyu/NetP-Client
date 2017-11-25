@@ -8,6 +8,7 @@ class SellingFrameHandler:
     # Send sell Request to Server
     def sell(self, item):
 
+        msg = 'No Image'
         if len(item.itemName) > 15:
             msg = 'itemName is too long'
         elif item.itemName == '':
@@ -24,14 +25,15 @@ class SellingFrameHandler:
             msg = 'desc is too long'
         else:
             str = item.imgPath.split('.')
-            sellDict = {'MSG': '/SLIT', 'ITNAME': item.itemName, 'SELLER': item.seller,
-                        'PRICE': item.price, 'ITDESC': item.itemDesc, 'ITPATH': str[1]}
-            self.client.sendMsg(sellDict)
-            self.client.sendImg(item.imgPath)
-            self.client.sem.acquire()
-            if self.client.rcvThread.msg == 'ACK':
-                msg = '''Sell Item Complete'''
-                return True, msg
-            else:
-                msg = '''Sell Item Failed'''
+            if len(str) >= 2:
+                sellDict = {'MSG': '/SLIT', 'ITNAME': item.itemName, 'SELLER': item.seller,
+                            'PRICE': item.price, 'ITDESC': item.itemDesc, 'ITPATH': str[1]}
+                self.client.sendMsg(sellDict)
+                self.client.sendImg(item.imgPath)
+                self.client.sem.acquire()
+                if self.client.rcvThread.msg == 'ACK':
+                    msg = '''Sell Item Complete'''
+                    return True, msg
+                else:
+                    msg = '''Sell Item Failed'''
         return False, msg

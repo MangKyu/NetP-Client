@@ -112,23 +112,22 @@ class SettingFrame:
     # request my current auction list
     def aucList(self, event):
         # Get the Message from Controller whether auction list request was succeeded
-        aFlag, msg = self.mainView.mc.eventHandler.settingHandler.aucList(self.mainView.mc.user.id)
-        if aFlag:
-            self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
-        else:
+        aFlag, msg = self.mainView.mc.eventHandler.settingHandler.aucList()
+        if not aFlag:
             self.mainView.mc.showMessage('No Auction list', msg)
+        self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
 
     # request my purchased list
     def purchaseList(self, event):
         # Get the Message from Controller whether purchased list request was succeeded
-        pFlag, msg = self.mainView.mc.eventHandler.settingHandler.purchaseList(self.mainView.mc.user.id)
+        pFlag, msg = self.mainView.mc.eventHandler.settingHandler.purchaseList()
         if pFlag:
             self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
         else:
             self.mainView.mc.showMessage('No purchase list', msg)
 
     def watchList(self, event):
-        wFlag, msg = self.mainView.mc.eventHandler.settingHandler.watchList(self.mainView.mc.user.id)
+        wFlag, msg = self.mainView.mc.eventHandler.settingHandler.watchList()
         if wFlag:
             self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['watch'].watchlistFrame)
             self.mainView.mc.eventHandler.watchHandler.setWatchlist()

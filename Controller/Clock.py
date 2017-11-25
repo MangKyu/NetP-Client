@@ -18,10 +18,11 @@ class Clock(threading.Thread):
     # Count time for auction time
     def run(self):
         while self.tFlag:
-            if self.sFlag:
-                self.sem.acquire()
+
             now = datetime.datetime.now()
             curTime = now.strftime('%Y-%m-%d %H:%M:%S')
             self.roomFrame.roomFrame.curT.configure(text=curTime)
             time.sleep(1)
+            if self.sFlag:
+                self.sem.acquire()
         print('Clock Thread exit!')

@@ -10,7 +10,7 @@ class SettingFrameHandler:
         if newPW != newPW2:
             msg = 'Check PW and PW2'
         else:
-            changeDict = {'MSG': '/CHPW', 'ID': id, 'NEWPW': newPW, 'CURPW': curPW}
+            changeDict = {'MSG': '/CHPW', 'NEWPW': newPW, 'CURPW': curPW}
             self.client.sendMsg(changeDict)
             self.client.sem.acquire()
             if self.client.rcvThread.msg == 'ACK':
@@ -22,8 +22,8 @@ class SettingFrameHandler:
         return False, msg
 
     # Send Charge Money Request to Server
-    def chargeMoney(self, id, money):
-        chargeDict = {'MSG': '/CHMN', 'ID': id, 'MONEY': money}
+    def chargeMoney(self, money):
+        chargeDict = {'MSG': '/CHMN', 'MONEY': money}
         self.client.sendMsg(chargeDict)
         self.client.sem.acquire()
         if self.client.rcvThread.msg == 'ACK':
@@ -35,8 +35,8 @@ class SettingFrameHandler:
         return False, msg
 
     # Send Auction List Request to Server
-    def aucList(self, id):
-        aucDict = {'MSG': '/ACLT', 'ID': id}
+    def aucList(self):
+        aucDict = {'MSG': '/ACLT'}
         self.client.sendMsg(aucDict)
         self.client.sem.acquire()
         if self.client.rcvThread.msg == 'ACK':
@@ -47,8 +47,8 @@ class SettingFrameHandler:
         return False, msg
 
     # Send Purchased List Request to Server
-    def purchaseList(self, id):
-        purDict = {'MSG': '/PCLT', 'ID': id}
+    def purchaseList(self):
+        purDict = {'MSG': '/PCLT'}
         self.client.sendMsg(purDict)
         self.client.sem.acquire()
         if self.client.rcvThread.msg == 'ACK':
@@ -58,13 +58,13 @@ class SettingFrameHandler:
             msg = '''No Purchased List'''
         return False, msg
 
-    def watchList(self, id):
-        watchDict = {'MSG': '/WCLT', 'ID': id}
+    def watchList(self):
+        watchDict = {'MSG': '/WCLT'}
         self.client.sendMsg(watchDict)
         self.client.sem.acquire()
         if self.client.rcvThread.msg == 'ACK':
             msg = '''Get List Complete'''
             return True, msg
         else:
-            msg = '''No Purchased List'''
+            msg = '''No Watch List'''
         return False, msg

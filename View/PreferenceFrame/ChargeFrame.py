@@ -33,7 +33,7 @@ class ChargeFrame:
         money = self.moneyEntry.get()
 
         # Send the Request to the Controller
-        chargeFlag, msg = self.mainView.mc.eventHandler.settingHandler.chargeMoney(self.mainView.mc.user.id, money)
+        chargeFlag, msg = self.mainView.mc.eventHandler.settingHandler.chargeMoney(money)
 
         # Get the Message from Controller whether Charge Money was succeeded
         if chargeFlag:

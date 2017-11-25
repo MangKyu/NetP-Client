@@ -31,12 +31,12 @@ class RoomFrame:
         roomFrame.imageLabel.bind('<Button-1>', self.clickLogo)
 
         roomFrame.name = Label(roomFrame)
-        roomFrame.name.place(relx=0.5, rely=0.146, relheight=0.04, relwidth=0.3)
+        roomFrame.name.place(relx=0.5, rely=0.146, relheight=0.05, relwidth=0.3)
         roomFrame.name.configure(text=self.mainView.mc.user.name, bg='#4f779e', fg='white', font=('08서울남산체 M', 12))
         roomFrame.name.lift()
 
         roomFrame.money = Label(roomFrame)
-        roomFrame.money.place(relx=0.5, rely=0.212, relheight=0.04, relwidth=0.3)
+        roomFrame.money.place(relx=0.5, rely=0.212, relheight=0.05, relwidth=0.3)
         roomFrame.money.configure(text=self.mainView.mc.user.money, bg='#4f779e', fg='white', font=('08서울남산체 B', 12))
         roomFrame.money.lift()
 
@@ -66,7 +66,7 @@ class RoomFrame:
         roomFrame.imgPath = None
 
         roomFrame.imgLabel = Label(roomFrame)
-        roomFrame._img1 = PhotoImage(file="../Controller/test.png")
+        roomFrame._img1 = PhotoImage(file="../View/Pictures/aa.png")
         roomFrame.imgLabel.place(relx=0.26, rely=0.3, height=120, width=150)
         roomFrame.imgLabel.configure(image=roomFrame._img1)
         roomFrame.imgLabel.bind('<Button-1>', self.newImage)

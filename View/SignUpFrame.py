@@ -126,12 +126,12 @@ class SignUpFrame:
         code = self.signUpFrame.codeEntry.get()
 
         # Send the Request to the Controller
-        signUpFlag, msg = self.mainView.mc.eventHandler.signUpHandler.signUp(name, id, pw, pw2, mail, code,self.signUpFrame.IDBool,
+        signUpFlag, msg = self.mainView.mc.eventHandler.signUpHandler.signUp(name, id, pw, pw2, mail, code, self.signUpFrame.IDBool,
                         self.signUpFrame.mailBool, self.signUpFrame.id, self.signUpFrame.mail, self.signUpFrame.code)
 
         # Get the Message from Controller whether Sign Up was succeeded
         if signUpFlag:
-            self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
+            self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['login'].loginFrame)
         else:
             self.mainView.mc.showMessage('Sign Up Error', msg)
             if msg == 'Please Check your ID':

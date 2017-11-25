@@ -21,7 +21,6 @@ class RoomFrameHandler:
         self.roomFrame.roomFrame.imgPath = path
         self.roomFrame.setImage(watch)
 
-
     # Send Buy Request to Server
     def buy(self, myPrice, price, endTime, roomIdx):
         if myPrice <= price:
@@ -32,7 +31,7 @@ class RoomFrameHandler:
             now = datetime.datetime.now()
             endTime = datetime.datetime.strptime(endTime, '%Y-%m-%d %H:%M:%S')
             if now < endTime:
-                sendDict = {'MSG': '/ACRQ', 'PRICE': myPrice, 'BUYER': self.client.adminRoom.user.id, 'RIDX': roomIdx}
+                sendDict = {'MSG': '/ACRQ', 'PRICE': myPrice, 'RIDX': roomIdx}
                 self.client.sendMsg(sendDict)
                 self.client.sem.acquire()
                 if self.client.rcvThread.msg == 'ACK':

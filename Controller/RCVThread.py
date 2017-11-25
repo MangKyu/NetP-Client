@@ -18,7 +18,7 @@ class RCVThread(threading.Thread):
         self.user = user
 
     def run(self):
-        try:
+        #try:
             while self.connFlag:
                 msg = self.sock.recv(4096)
                 msgDict = self.client.aesCipher.decrypt(msg)
@@ -29,7 +29,7 @@ class RCVThread(threading.Thread):
                     print("/EXIT- RCVThread")
                     break
 
-                if msgProtocol == '/LGIN' or msgProtocol == '/SGUP':
+                if msgProtocol == '/LGIN':
                     if msgDict['RPLY'] == 'ACK':
                         self.msg = 'ACK'
                         self.user.setUser(msgDict['NAME'], msgDict['ID'], msgDict['MONEY'])
@@ -37,7 +37,8 @@ class RCVThread(threading.Thread):
                         self.msg = 'REJ'
                     self.client.sem.release()
 
-                elif msgProtocol == '/CKID' or msgProtocol == '/MAIL' or msgProtocol == '/SLIT' or msgProtocol == '/CHPW':
+                elif msgProtocol == '/CKID' or msgProtocol == '/MAIL' or msgProtocol == '/SLIT' or \
+                                msgProtocol == '/CHPW'or msgProtocol == '/SGUP':
                     if msgDict['RPLY'] == 'ACK':
                         self.msg = 'ACK'
                     else:
@@ -105,15 +106,17 @@ class RCVThread(threading.Thread):
                     elif msgDict['RPLY'] == 'REJ':
                         self.msg = 'REJ'
                     self.client.sem.release()
-        except:
-            print('RCVThread Exit')
-            self.exit()
+        #except:
+        #    print('RCVThread Exit')
+            #self.exit()
 
     # exit the thread
     def exit(self):
         try:
             self.sock.close()
-            self.connFlag = False
+            if self.client.eventHandler.roomHandler.clock.sFlag:
+                self.client.eventHandler.roomHandler.clock.sem.release()
             self.client.eventHandler.roomHandler.clock.tFlag = False
+            self.connFlag = False
         except:
             pass
