@@ -16,7 +16,7 @@ class LoginFrameHandler:
                 msg = 'Success'
                 return True, msg
             else:
-                msg = 'Wrong ID or Password'
+                msg = 'Login Failed'
 
         elif id == '':
             msg = 'Please Enter your ID'
