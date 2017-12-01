@@ -4,7 +4,6 @@ from Controller.FrameHandler import LoginFrameHandler, SignUpFrameHandler, \
 # the class which has each frame handler
 class EventHandler:
     frameList = None
-    client = None
     loginHandler = None
     signUpHandler = None
     mainHandler = None
@@ -14,7 +13,6 @@ class EventHandler:
     watchHandler = None
     # Constructor for EventHandler instance
     def __init__(self, client, frameList):
-        self.client = client
         self.frameList = frameList
         self.loginHandler = LoginFrameHandler.LoginFrameHandler(client)
         self.signUpHandler = SignUpFrameHandler.SignUpFrameHandler(client)

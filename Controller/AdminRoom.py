@@ -3,11 +3,9 @@ from Model import Room, Watch
 class AdminRoom:
     roomList = None
     room = None
-    user = None
     watchList = None
 
-    def __init__(self, user):
-        self.user = user
+    def __init__(self):
         self.roomList = {}
         self.room = Room.Room(-1, 'None', 'None')
         self.watchList = []

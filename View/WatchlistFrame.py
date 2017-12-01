@@ -4,6 +4,7 @@ except ImportError:
     from tkinter import *
 from PIL import ImageTk, Image
 import re
+
 class WatchlistFrame:
     root = None
     watchlistFrame = None
@@ -110,7 +111,7 @@ class WatchlistFrame:
         self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['main'].mainFrame)
 
     def refreshData(self):
-        name, id, money = self.mainView.mc.user.getUser()
+        name, money = self.mainView.mc.user.getUser()
         self.watchlistFrame.name.configure(text=name)
         self.watchlistFrame.money.configure(text=money)
 

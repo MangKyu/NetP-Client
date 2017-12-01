@@ -66,7 +66,7 @@ class RoomFrame:
         roomFrame.imgPath = None
 
         roomFrame.imgLabel = Label(roomFrame)
-        roomFrame._img1 = PhotoImage(file="../View/Pictures/aa.png")
+        roomFrame._img1 = PhotoImage(file="../View/Pictures/Icon.png")
         roomFrame.imgLabel.place(relx=0.26, rely=0.3, height=120, width=150)
         roomFrame.imgLabel.configure(image=roomFrame._img1)
         roomFrame.imgLabel.bind('<Button-1>', self.newImage)
@@ -144,7 +144,7 @@ class RoomFrame:
 
     # Refresh User's Data
     def refreshData(self):
-        name, id, money = self.mainView.mc.user.getUser()
+        name, money = self.mainView.mc.user.getUser()
         self.roomFrame.name.configure(text=name)
         self.roomFrame.money.configure(text=money)
 

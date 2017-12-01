@@ -127,6 +127,6 @@ class SellingFrame:
 
     # Refresh User's Data
     def refreshData(self):
-        name, id, money = self.mainView.mc.user.getUser()
+        name, money = self.mainView.mc.user.getUser()
         self.sellingFrame.name.configure(text=name)
         self.sellingFrame.money.configure(text=money)

@@ -80,7 +80,7 @@ class SettingFrame:
         panel.bind('<Button-1>', self.aucList)
 
         img = self.mainView.mc.openPhotoImage(self.path + "purple.png")
-        panel = Label(settingFrame, image=img, bg='#fcbd00')
+        panel = Label(settingFrame, image=img, bg='#6d2e9e')
         panel.image = img
         label = Label(settingFrame, font=('08서울남산체 M', 15))
         label.configure(text='''Watch List''', bg = "#1c4478", fg='white', font=('08서울남산체 M', 16))
@@ -93,7 +93,7 @@ class SettingFrame:
 
     # Refresh User's Data
     def refreshData(self):
-        name, id, money = self.mainView.mc.user.getUser()
+        name, money = self.mainView.mc.user.getUser()
         self.settingFrame.name.configure(text=name)
         self.settingFrame.money.configure(text=money)
 

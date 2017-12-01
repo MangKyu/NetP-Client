@@ -18,4 +18,4 @@ class User:
 
     # get user data
     def getUser(self):
-        return self.name, self.id, self.money
+        return self.name, self.money

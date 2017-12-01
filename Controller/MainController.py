@@ -15,7 +15,8 @@ class MainController:
     # Constructor for Main Controller instance
     def __init__(self):
         self.user = User.User()
-        self.adminRoom = AdminRoom.AdminRoom(self.user)
+        #self.adminRoom = AdminRoom.AdminRoom(self.user)
+        self.adminRoom = AdminRoom.AdminRoom()
 
     # Exit
     def exit(self):

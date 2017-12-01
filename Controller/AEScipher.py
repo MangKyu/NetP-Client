@@ -3,7 +3,6 @@ from Cryptodome import Random
 import ast
 
 class AEScipher:
-
     # Constructor for Encryption and Decryption
     def __init__(self):
         self.s_key = b'\x07\xb4t\xa6\rsZ\x89I=f\xec\xe0?\xfa\x90\xa8\xb0\xa9\xdd\x8f\xfd\xef\x10\xeah\xa1\xe3\xc9z\xeb\xf6'

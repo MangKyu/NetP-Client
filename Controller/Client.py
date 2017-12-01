@@ -17,19 +17,17 @@ class Client:
     eventHandler = None
     adminRoom = None
     aesCipher = None
-    user = None
 
     # Constructor for client instance
     def __init__(self, user, eventHandler, adminRoom):
-        self.user = user
         self.aesCipher = AEScipher.AEScipher()
         self.adminRoom = adminRoom
         self.eventHandler = eventHandler
         self.sem = threading.Semaphore(0)
-        self.connect()
+        self.connect(user)
 
     # connect with server and create Receiver Thread
-    def connect(self):
+    def connect(self, user):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.host, self.port))
         msg = self.sock.recv(1024)
@@ -40,7 +38,7 @@ class Client:
         # reconnect with another port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.host, self.port))
-        self.rcvThread = RCVThread.RCVThread(self, self.sock, self.user)
+        self.rcvThread = RCVThread.RCVThread(self, self.sock, user)
         self.rcvThread.start()
 
     # send message
@@ -78,8 +76,9 @@ class Client:
         mail_msg += "\n Authorization Code = "
         mail_msg += code
         msgAlt.attach(MIMEText(mail_msg, 'html', 'utf-8'))
+        print(code)
 
-        fp = open("../View/logo.png", 'rb')
+        fp = open("../View/Pictures/Icon.png", 'rb')
         msgImage = MIMEImage(fp.read())
         fp.close()
 

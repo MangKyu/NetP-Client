@@ -18,7 +18,7 @@ class RCVThread(threading.Thread):
         self.user = user
 
     def run(self):
-        #try:
+        try:
             while self.connFlag:
                 msg = self.sock.recv(4096)
                 msgDict = self.client.aesCipher.decrypt(msg)
@@ -86,7 +86,10 @@ class RCVThread(threading.Thread):
                         showinfo('Auction', msgDict['CNT'])
                     elif msgDict['RPLY'] == 'NON':
                         self.user.money = self.user.money + msgDict['MONEY']
-                        self.client.eventHandler.changeFrame(self.client.eventHandler.frameList['room'].roomFrame)
+                        print('BABABABAB')
+                        self.client.eventHandler.changeFrame(self.client.eventHandler.frameList['main'].mainFrame)
+                        print('CAVABABAB')
+                        self.client.eventHandler.frameList['main'].goThatRoom(msgDict['RIDX'])
                 elif msgProtocol == '/ACLT':
                     if len(msgDict['ROOMS']) == 0:
                         self.msg = 'REJ'
@@ -106,9 +109,9 @@ class RCVThread(threading.Thread):
                     elif msgDict['RPLY'] == 'REJ':
                         self.msg = 'REJ'
                     self.client.sem.release()
-        #except:
-        #    print('RCVThread Exit')
-            #self.exit()
+        except:
+            print('RCVThread Exit')
+            self.exit()
 
     # exit the thread
     def exit(self):

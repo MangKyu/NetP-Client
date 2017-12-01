@@ -60,7 +60,7 @@ class MainFrame:
         self.mainFrame = mainFrame
 
     # go Room Action for Button
-    def goRoom(self, event):
+    def goRoom(self, *event):
 
         # Get Current Item from listbox
         curItem = self.mainFrame.roomFrame.tree.item(self.mainFrame.roomFrame.tree.focus())
@@ -78,9 +78,25 @@ class MainFrame:
         except:
             pass
 
+        # go Room Action for Button
+    def goThatRoom(self, roomIdx):
+        # Send the Request to the Controller
+        try:
+            rFlag, msg = self.mainView.mc.eventHandler.mainHandler.goRoom(roomIdx)
+            # Get the Message from Controller whether go Room was succeeded
+            if rFlag:
+                path = self.mainView.mc.adminRoom.roomList[roomIdx].item.imgPath
+                watch = self.mainView.mc.adminRoom.roomList[roomIdx].watch
+                self.mainView.mc.eventHandler.roomHandler.setImg(path, watch)
+                self.mainView.mc.eventHandler.changeFrame(self.mainView.frameList['room'].roomFrame)
+            else:
+                self.mainView.mc.showMessage('msg', 'Failed  to get room info')
+        except:
+            pass
+
     # Refresh User's Data
     def refreshData(self):
-        name, id, money = self.mainView.mc.user.getUser()
+        name, money = self.mainView.mc.user.getUser()
         self.mainFrame.name.configure(text=name)
         self.mainFrame.money.configure(text=money)
 
